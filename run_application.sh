@@ -16,7 +16,8 @@ PATH=~/Desktop/Documents/4coder:$PATH
 cd ~/Desktop/Documents/Projects/scripts
 result=$(cat applications | awk -vFPAT='([^ ]+)|("[^"]+")' '{print $1}' | sed 's/\"//g' | dmenu -i -l 10)
 if [ $result -z ]; then
-    # HACK: if the user exits out of dmenu by pressing escape or Ctrl-C make sure no programs get accidentally run
+    # HACK: if the user exits out of dmenu by pressing escape or Ctrl-C make sure no programs get accidentally run.
+    # No program should exist with this name
     result="djflsdjf"
 fi
 program_to_run_format=$(printf '/%s/ {print $2}' "$result")
