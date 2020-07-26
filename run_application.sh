@@ -14,6 +14,7 @@
 # If we select 4coder make sure we are able to launch it by having the binary in our $PATH
 PATH=~/Desktop/Documents/4coder:$PATH
 cd ~/Desktop/Documents/Projects/scripts
+# https://stackoverflow.com/questions/29642102/how-to-make-awk-ignore-the-field-delimiter-inside-double-quotes
 result=$(cat applications | awk -vFPAT='([^ ]+)|("[^"]+")' '{print $1}' | sed 's/\"//g' | dmenu -i -l 10)
 if [ $result -z ]; then
     # HACK: if the user exits out of dmenu by pressing escape or Ctrl-C make sure no programs get accidentally run.
