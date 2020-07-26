@@ -11,21 +11,27 @@
 # Irssi irssi yes
 # "File Manager" nemo no
 
+set -eu
+
+# https://stackoverflow.com/questions/29642102/how-to-make-awk-ignore-the-field-delimiter-inside-double-quotes
+awk_application() {
+    awk -vFPAT='([^ ]+)|("[^"]+")' "$1"
+}
+
 # If we select 4coder make sure we are able to launch it by having the binary in our $PATH
 PATH=~/Desktop/Documents/4coder:$PATH
 cd ~/Desktop/Documents/Projects/scripts
-# https://stackoverflow.com/questions/29642102/how-to-make-awk-ignore-the-field-delimiter-inside-double-quotes
-result=$(cat applications | awk -vFPAT='([^ ]+)|("[^"]+")' '{print $1}' | sed 's/\"//g' | dmenu -i -l 10)
-if [ $result -z ]; then
+result=$(cat applications | awk_application '{print $1}' | sed 's/\"//g' | dmenu -i -l 10)
+if [ "$result" -z ]; then
     # HACK: if the user exits out of dmenu by pressing escape or Ctrl-C make sure no programs get accidentally run.
     # No program should exist with this name
     result="djflsdjf"
 fi
 program_to_run_format=$(printf '/%s/ {print $2}' "$result")
 run_in_terminal_format=$(printf '/%s/ {print $3}' "$result")
-program_to_run=$(cat applications | awk -vFPAT='([^ ]+)|("[^"]+")' "$program_to_run_format")
-run_in_terminal=$(cat applications | awk -vFPAT='([^ ]+)|("[^"]+")' "$run_in_terminal_format")
-if [ $run_in_terminal = "yes" ]; then
+program_to_run=$(cat applications | awk_application "$program_to_run_format")
+run_in_terminal=$(cat applications | awk_application "$run_in_terminal_format")
+if [ "$run_in_terminal" = "yes" ]; then
     alacritty -e $program_to_run
 else
     $program_to_run &

@@ -2,6 +2,8 @@
 
 # Easy way to start editing my config files quickly
 
+set -eu
+
 # We need 4coder if we select '4coder' in dmenu
 PATH=~/Desktop/Documents/4coder:$PATH
 configs="4coder:nvim:alacritty:scripts"
