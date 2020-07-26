@@ -5,10 +5,6 @@
 
 PATH=~/Desktop/Documents/4coder:$PATH
 result=$(echo $PATH | tr ':' ' ' | xargs ls | sed '/:/ d;/^$/ d' | sort | dmenu)
-if [ "$result" = "4ed" ]; then
-    # I want 4coder to launch in Projects folder
-    cd /home/noah/Desktop/Documents/Projects
-fi
 output=$($result 2>&1)
 exit_code=$?
 if [ $exit_code -ne 0 ]; then

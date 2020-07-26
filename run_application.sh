@@ -23,14 +23,18 @@ PATH=~/Desktop/Documents/4coder:$PATH
 cd ~/Desktop/Documents/Projects/scripts
 result=$(cat applications | awk_application '{print $1}' | sed 's/\"//g' | dmenu -i -l 10)
 if [ "$result" -z ]; then
-    # HACK: if the user exits out of dmenu by pressing escape or Ctrl-C make sure no programs get accidentally run.
-    # No program should exist with this name
-    result="djflsdjf"
+    exit 1
 fi
+
 program_to_run_format=$(printf '/%s/ {print $2}' "$result")
 run_in_terminal_format=$(printf '/%s/ {print $3}' "$result")
 program_to_run=$(cat applications | awk_application "$program_to_run_format")
 run_in_terminal=$(cat applications | awk_application "$run_in_terminal_format")
+
+if [ "$result" = "4coder" ]; then
+    cd ~/Desktop/Documents/Projects
+fi
+
 if [ "$run_in_terminal" = "yes" ]; then
     alacritty -e $program_to_run
 else
