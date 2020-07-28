@@ -15,3 +15,8 @@ get_terminal_e_option() {
     terminal_e_option=$(echo "$s" | cut -d ' ' -f 3)
     echo $terminal_e_option
 }
+
+get_editor() {
+    editor=$(echo "$s" | cut -d ' ' -f 4)
+    echo $editor
+}
