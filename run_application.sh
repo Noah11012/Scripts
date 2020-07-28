@@ -30,13 +30,15 @@ program_to_run_format=$(printf '/%s/ {print $2}' "$result")
 run_in_terminal_format=$(printf '/%s/ {print $3}' "$result")
 program_to_run=$(cat applications | awk_application "$program_to_run_format")
 run_in_terminal=$(cat applications | awk_application "$run_in_terminal_format")
+cd ~/Desktop/Documents/Projects/scripts
+source ./get_settings.sh
 
 if [ "$result" = "4coder" ]; then
     cd ~/Desktop/Documents/Projects
 fi
 
 if [ "$run_in_terminal" = "yes" ]; then
-    alacritty -e $program_to_run
+    $(get_terminal) $(get_terminal_e_option) $program_to_run
 else
     $program_to_run &
 fi
