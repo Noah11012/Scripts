@@ -19,7 +19,7 @@ case $result in
         4ed ~/Desktop/Documents/4coder/config.4coder
         ;;
     "nvim")
-        $(get_terminal) $(get_terminal_wd_option) $(get_editor) ~/.config/nvim/init.vim
+        $(get_terminal) $(get_terminal_e_option) $(get_editor) ~/.config/nvim/init.vim
         ;;
     "alacritty")
         $(get_terminal) $(get_terminal_e_option) $(get_editor) ~/.config/alacritty/alacritty.yml
