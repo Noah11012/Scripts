@@ -4,7 +4,7 @@
 # This script is used to launch applications in either /usr/bin or other locations
 
 PATH=~/Desktop/Documents/4coder:$PATH
-result=$(echo $PATH | tr ':' ' ' | xargs ls | sed '/:/ d;/^$/ d' | sort | dmenu)
+result=$(echo $PATH | tr ':' ' ' | xargs ls | sed '/:/ d;/^$/ d' | sort -u | dmenu)
 output=$($result 2>&1)
 exit_code=$?
 if [ $exit_code -ne 0 ]; then
