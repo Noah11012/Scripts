@@ -1,0 +1,3 @@
+terminal=st
+terminal_wd_option=-d
+terminal_e_option=-e

@@ -8,22 +8,27 @@ set -eu
 PATH=~/Desktop/Documents/4coder:$PATH
 configs="Open scripts:4coder:nvim:alacritty:scripts"
 result=$(echo $configs | tr ':' '\n' | dmenu)
+cd ~/Desktop/Documents/Projects/scripts
+s=$(cat settings | awk -F= '{print $2}' | tr '\n' ' ')
+terminal=$(echo "$s" | cut -d ' ' -f 1)
+terminal_wd_option=$(echo "$s" | cut -d ' ' -f 2)
+terminal_e_option=$(echo "$s" | cut -d ' ' -f 3)
 
 case $result in
     "Open scripts")
-        alacritty --working-directory ~/Desktop/Documents/Projects/scripts
+        $terminal $terminal_wd_option ~/Desktop/Documents/Projects/scripts
         ;;
     "4coder")
         4ed ~/Desktop/Documents/4coder/config.4coder
         ;;
     "nvim")
-        alacritty -e nvim ~/.config/nvim/init.vim
+        $terminal $terminal_e_option nvim ~/.config/nvim/init.vim
         ;;
     "alacritty")
-        alacritty -e nvim ~/.config/alacritty/alacritty.yml
+        $terminal $terminal_e_option nvim ~/.config/alacritty/alacritty.yml
         ;;
     "scripts")
         config_file=$(ls ~/Desktop/Documents/Projects/scripts -1 | dmenu)
-        alacritty --working-directory ~/Desktop/Documents/Projects/scripts -e nvim $config_file
+        $terminal $terminal_wd_option ~/Desktop/Documents/Projects/scripts $terminal_e_option nvim $config_file
         ;;
 esac
