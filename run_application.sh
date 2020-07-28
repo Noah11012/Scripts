@@ -22,7 +22,7 @@ awk_application() {
 PATH=~/Desktop/Documents/4coder:$PATH
 cd ~/Desktop/Documents/Projects/scripts
 result=$(cat applications | awk_application '{print $1}' | sed 's/\"//g' | dmenu -i -l 10)
-if [ "$result" -z ]; then
+if [ -z "$result" ]; then
     exit 1
 fi
 
