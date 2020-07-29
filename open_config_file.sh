@@ -6,7 +6,7 @@ set -eu
 
 # We need 4coder if we select '4coder' in dmenu
 PATH=~/Desktop/Documents/4coder:$PATH
-configs="Open scripts:4coder:nvim:alacritty:scripts"
+configs="Open scripts:Open projects:4coder:nvim:alacritty:scripts"
 result=$(echo $configs | tr ':' '\n' | dmenu)
 cd ~/Desktop/Documents/Projects/scripts
 source ./get_settings.sh
@@ -14,6 +14,9 @@ source ./get_settings.sh
 case $result in
     "Open scripts")
         $(get_terminal) $(get_terminal_wd_option) ~/Desktop/Documents/Projects/scripts
+        ;;
+    "Open projects")
+        $(get_terminal) $(get_terminal_wd_option) ~/Desktop/Documents/Projects
         ;;
     "4coder")
         4ed ~/Desktop/Documents/4coder/config.4coder
