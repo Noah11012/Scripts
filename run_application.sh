@@ -21,7 +21,7 @@ awk_application() {
 # If we select 4coder make sure we are able to launch it by having the binary in our $PATH
 PATH=~/Desktop/Documents/4coder:$PATH
 cd ~/Desktop/Documents/Projects/scripts
-result=$(cat applications | awk_application '{print $1}' | sed 's/\"//g' | dmenu -i -l 10)
+result=$(cat applications | awk_application '{print $1}' | sed 's/\"//g' | dmenu -c -i -l 10)
 if [ -z "$result" ]; then
     exit 1
 fi
